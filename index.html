@@ -1,227 +1,28 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Warrior Fury Leveling — TBC Anniversary</title>
-<meta name="description" content="Guía interactiva de leveo Fury Warrior para WoW TBC Anniversary, con talentos nivel por nivel y notas para tankear dungeons.">
+<meta name="description" content="Guía interactiva Fury Warrior para TBC Anniversary: talentos, armas, tankeo, rotación e hitos 10-70.">
 <style>
-:root {
-  --bg:#0b0d10; --panel:#15191f; --panel2:#1b2028; --border:#303844;
-  --text:#edf1f5; --muted:#aab3bf; --gold:#f0b84b; --red:#d94b4b;
-  --green:#70c48f; --blue:#73a8e8; --shadow:0 12px 32px rgba(0,0,0,.34);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:linear-gradient(180deg,#090b0e,#11151b 38%,#0b0d10);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
-a{color:#f6cb72;text-decoration:none} a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--border);background:rgba(8,10,13,.9);position:sticky;top:0;z-index:20;backdrop-filter:blur(10px)}
-.nav{max-width:1180px;margin:auto;display:flex;align-items:center;gap:22px;padding:12px 20px}
-.brand{font-weight:800;letter-spacing:.04em;color:#fff;white-space:nowrap}
-.brand span{color:var(--gold)}
-.navlinks{display:flex;gap:16px;flex-wrap:wrap;font-size:.92rem}
-main{max-width:1180px;margin:auto;padding:34px 20px 80px}
-.hero{display:grid;grid-template-columns:1.6fr .8fr;gap:22px;align-items:stretch}
-.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
-.hero-copy{padding:30px}
-.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);font-weight:800}
-h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.02;margin:.4rem 0 1rem}
-h2{font-size:1.75rem;margin:0 0 12px}
-h3{margin:0 0 7px}
-.lead{color:#cbd2da;font-size:1.08rem;max-width:760px}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.badge{border:1px solid #493d27;color:#f7d38d;background:#2a2215;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:700}
-.verdict{padding:24px;display:flex;flex-direction:column;justify-content:center}
-.verdict .big{font-size:1.55rem;font-weight:850;color:var(--green)}
-.verdict p{color:var(--muted);margin-bottom:0}
-.grid{display:grid;grid-template-columns:260px 1fr;gap:24px;margin-top:28px}
-aside{position:sticky;top:78px;height:max-content;padding:18px}
-aside a{display:block;padding:8px 10px;color:#cfd6de;border-radius:8px}
-aside a:hover{background:#202630;text-decoration:none;color:white}
-.content section{padding:26px;margin-bottom:20px}
-.note{border-left:4px solid var(--gold);background:#201b12;padding:14px 16px;border-radius:8px;margin:18px 0}
-.good{border-left-color:var(--green);background:#132019}
-.warn{border-left-color:var(--red);background:#251617}
-.levelbox{display:grid;grid-template-columns:160px 1fr;gap:20px;align-items:center;margin:18px 0 22px}
-.levelnum{font-size:3rem;font-weight:900;color:var(--gold);text-align:center}
-input[type=range]{width:100%;accent-color:var(--gold)}
-.talent-current{padding:18px;border:1px solid #544329;background:#211b12;border-radius:12px}
-.talent-name{font-size:1.35rem;font-weight:850}
-.tree{font-size:.78rem;padding:3px 7px;border-radius:999px;background:#34281a;color:#ffd985;margin-left:8px}
-.timeline{display:grid;gap:8px;margin-top:18px}
-.row{display:grid;grid-template-columns:70px 1.25fr 90px 1.6fr;gap:12px;padding:10px 12px;border:1px solid #2d333d;border-radius:9px;background:#12161b;align-items:center}
-.row.active{border-color:#a87b2d;background:#211a10}
-.lvl{font-weight:900;color:#f5ca73}
-.rank{color:#aeb7c2}
-.tablewrap{overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:.94rem}
-th,td{padding:11px 10px;border-bottom:1px solid #303640;text-align:left;vertical-align:top}
-th{color:#f3cb7a;background:#171b21;position:sticky;top:0}
-.priority-high{color:#7ddb9e;font-weight:800}
-.pills{display:flex;gap:8px;flex-wrap:wrap}
-.pill{background:#232a33;border:1px solid #38414d;border-radius:999px;padding:4px 9px;font-size:.82rem}
-.steps{counter-reset:step;display:grid;gap:10px}
-.step{position:relative;padding:13px 14px 13px 48px;border:1px solid #303844;background:#12161b;border-radius:9px}
-.step:before{counter-increment:step;content:counter(step);position:absolute;left:13px;top:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#3a2b16;color:#ffd37e;font-weight:900}
-.sources li{margin:9px 0;color:#bec6cf}
-footer{max-width:1180px;margin:auto;padding:0 20px 40px;color:#7f8996;font-size:.86rem}
-@media(max-width:850px){
- .hero,.grid{grid-template-columns:1fr}
- aside{position:static}
- .row{grid-template-columns:60px 1fr} .row .rank,.row .why{grid-column:2}
- .levelbox{grid-template-columns:1fr} .levelnum{text-align:left}
-}
-</style>
-</head>
-<body>
-<header>
-  <div class="nav">
-    <div class="brand">TBC <span>Warrior</span> Leveling</div>
-    <nav class="navlinks">
-      <a href="#talentos">Talentos</a><a href="#tank">Tankear Fury</a><a href="#rotacion">Rotación</a><a href="#trainer">Trainer</a><a href="#fuentes">Fuentes</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <div class="hero">
-    <div class="card hero-copy">
-      <div class="kicker">WoW · The Burning Crusade Anniversary</div>
-      <h1>Fury Warrior<br>Leveling 10 → 70</h1>
-      <p class="lead">Una guía práctica para subir principalmente como <strong>Fury</strong>, mantener buen ritmo en mundo abierto y seguir pudiendo <strong>tankear dungeons mientras leveleas</strong>.</p>
-      <div class="badges"><span class="badge">Fury leveling</span><span class="badge">Dungeon tank friendly</span><span class="badge">Nivel por nivel</span><span class="badge">Sin dependencias</span></div>
-    </div>
-    <div class="card verdict">
-      <div class="kicker">¿Tu idea tiene sentido?</div>
-      <div class="big">Sí: Fury es una opción muy razonable.</div>
-      <p>Las guías actuales no son idénticas: Icy Veins favorece Arms para un personaje con equipo flojo/solo, pero Wowhead recomienda Fury como una ruta muy fuerte y señala que incluso funciona muy bien para tankear durante el leveo antes de que el contenido exija más mitigación.</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <aside class="card">
-      <strong>Contenido</strong>
-      <a href="#resumen">Resumen</a>
-      <a href="#talentos">Talentos por nivel</a>
-      <a href="#tank">Tankear siendo Fury</a>
-      <a href="#rotacion">Rotación</a>
-      <a href="#trainer">Qué entrenar</a>
-      <a href="#armas">Armas y equipo</a>
-      <a href="#fuentes">Fuentes</a>
-    </aside>
-
-    <div class="content">
-      <section id="resumen" class="card">
-        <h2>Resumen rápido</h2>
-        <div class="note good"><strong>Para tu caso:</strong> empezaría Fury desde nivel 10. A nivel bajo, los talentos defensivos importan menos que jugar correctamente con Defensive Stance, amenaza, Rage y un cambio de arma/escudo cuando el pull lo amerite.</div>
-        <div class="pills">
-          <span class="pill">10–14: Cruelty 5/5</span>
-          <span class="pill">15–19: Unbridled Wrath 5/5</span>
-          <span class="pill">34: Sweeping Strikes</span>
-          <span class="pill">35–39: Flurry 5/5</span>
-          <span class="pill">40: Bloodthirst</span>
-          <span class="pill">50: Rampage</span>
-        </div>
-      </section>
-
-      <section id="talentos" class="card">
-        <h2>Talentos nivel por nivel</h2>
-        <p style="color:var(--muted)">Mueve el nivel y la guía te mostrará qué punto corresponde gastar. La secuencia está basada principalmente en la ruta Fury de Icy Veins, normalizada a un punto de talento por nivel.</p>
-        <div class="levelbox">
-          <div><div class="kicker">Tu nivel</div><div id="levelNum" class="levelnum">10</div></div>
-          <div><input id="levelSlider" type="range" min="10" max="70" value="10" step="1"><div id="talentCurrent" class="talent-current"></div></div>
-        </div>
-        <div id="timeline" class="timeline"></div>
-      </section>
-
-      <section id="tank" class="card">
-        <h2>¿Puedo tankear siendo Fury?</h2>
-        <div class="note good"><strong>Sí.</strong> Para dungeons de leveo, Fury puede tankear perfectamente si manejas amenaza y supervivencia. Wowhead incluso señala que Fury es muy efectivo durante el leveo y que el cambio obligatorio hacia un estilo más defensivo suele sentirse bastante más adelante, según equipo y healer.</div>
-        <h3>Checklist al entrar como tank</h3>
-        <div class="steps">
-          <div class="step"><strong>Defensive Stance.</strong> Úsala como base para generar más amenaza y recibir menos daño.</div>
-          <div class="step"><strong>Ten 1H + shield listos.</strong> No significa que debas llevar escudo en absolutamente cada trash; úsalo cuando el daño recibido lo justifique y en pulls/bosses peligrosos.</div>
-          <div class="step"><strong>Battle Shout arriba.</strong> Tu WeakAura ya se encarga de recordártelo.</div>
-          <div class="step"><strong>Marca un kill target.</strong> Warrior no destaca por amenaza AoE temprana; el focus de tu grupo hace una diferencia enorme.</div>
-          <div class="step"><strong>Sunder Armor/Revenge para amenaza.</strong> Tab-targeting entre enemigos ayuda a repartir amenaza.</div>
-          <div class="step"><strong>No quemes toda la Rage al final del pull.</strong> Llegar al siguiente grupo con Rage suele valer más que rematar un mob con una habilidad cara.</div>
-        </div>
-        <div class="note warn"><strong>Importante:</strong> “Fury puede tankear” no significa “ignora el escudo y las herramientas defensivas”. El equipo, healer, tamaño del pull y nivel de la dungeon mandan.</div>
-      </section>
-
-      <section id="rotacion" class="card">
-        <h2>Rotación práctica de leveo</h2>
-        <h3>Mundo abierto, nivel bajo</h3>
-        <div class="steps">
-          <div class="step">Mantén <strong>Battle Shout</strong>.</div>
-          <div class="step"><strong>Charge</strong> siempre que puedas para comenzar con Rage.</div>
-          <div class="step"><strong>Rend</strong> en enemigos que vivirán suficiente tiempo para aprovechar el bleed.</div>
-          <div class="step"><strong>Overpower</strong> cuando se habilite después de un dodge.</div>
-          <div class="step">Usa <strong>Heroic Strike</strong> como dump, no como botón que vacíe tu Rage constantemente.</div>
-          <div class="step">Desde 24, <strong>Execute</strong> para terminar enemigos cuando sea conveniente.</div>
-        </div>
-        <h3 style="margin-top:22px">Hitos</h3>
-        <p><strong>34:</strong> Sweeping Strikes mejora mucho los pulls múltiples. <strong>36:</strong> llega Whirlwind. <strong>40:</strong> Bloodthirst se convierte en tu botón Fury principal. <strong>62:</strong> Victory Rush hace mucho más fluido el chain pulling.</p>
-      </section>
-
-      <section id="trainer" class="card">
-        <h2>Habilidades que vale la pena entrenar</h2>
-        <div class="tablewrap"><table>
-          <thead><tr><th>Nivel</th><th>Habilidad / grupo</th><th>Prioridad</th><th>Por qué</th></tr></thead>
-          <tbody>
-          <tr><td>10</td><td>Defensive Stance quest / Taunt / Sunder Armor / Bloodrage</td><td class="priority-high">High</td><td>Do the Warrior class quest as soon as practical; tanking becomes much cleaner.</td></tr><tr><td>12</td><td>Overpower + Shield Bash rank 1</td><td class="priority-high">High</td><td>Overpower is excellent; Shield Bash gives you an interrupt with a shield.</td></tr><tr><td>14</td><td>Demoralizing Shout</td><td class="priority-high">High</td><td>Useful mitigation while tanking and on dangerous solo pulls.</td></tr><tr><td>16</td><td>Mocking Blow + Shield Block</td><td class="priority-high">High</td><td>Shield Block is extremely valuable for hard-hitting dungeon mobs/bosses.</td></tr><tr><td>18</td><td>Disarm</td><td class="priority-high">High</td><td>Very strong against many weapon-using humanoids.</td></tr><tr><td>20</td><td>Cleave + Retaliation</td><td class="priority-high">High</td><td>Cleave is your 2-target Rage dump; Retaliation is a powerful emergency/offensive cooldown.</td></tr><tr><td>24</td><td>Execute</td><td class="priority-high">High</td><td>Excellent finisher at &lt;20% target health.</td></tr><tr><td>28</td><td>Shield Wall</td><td class="priority-high">High</td><td>Major defensive cooldown.</td></tr><tr><td>30</td><td>Intercept</td><td class="priority-high">Medium</td><td>Mobility in Berserker Stance.</td></tr><tr><td>32</td><td>Berserker Rage</td><td class="priority-high">High</td><td>Fear break / Rage utility.</td></tr><tr><td>36</td><td>Whirlwind</td><td class="priority-high">High</td><td>Core cleave ability.</td></tr><tr><td>38</td><td>Pummel rank 1</td><td class="priority-high">High</td><td>Fast interrupt in Berserker Stance.</td></tr><tr><td>40</td><td>Bloodthirst</td><td class="priority-high">High</td><td>Core Fury attack from your talent point.</td></tr><tr><td>62</td><td>Victory Rush</td><td class="priority-high">High</td><td>Excellent for chain pulling.</td></tr><tr><td>64</td><td>Spell Reflection</td><td class="priority-high">High</td><td>Strong defensive/utility spell.</td></tr><tr><td>68</td><td>Commanding Shout</td><td class="priority-high">High</td><td>Group survivability option.</td></tr><tr><td>70</td><td>Intervene</td><td class="priority-high">High</td><td>Core tank/group utility.</td></tr>
-          </tbody>
-        </table></div>
-      </section>
-
-      <section id="armas" class="card">
-        <h2>Armas y equipo</h2>
-        <p>Warrior depende muchísimo del arma. Mientras leveleas, una mejora grande de arma puede valer más que varias piezas pequeñas de armadura. Para Fury dual wield, la fiabilidad mejora a medida que obtienes talentos como <strong>Precision</strong> y mejores estadísticas.</p>
-        <div class="note"><strong>Para tankear:</strong> mantén en tus bolsas un buen arma de una mano y escudo actualizados. Tu spec puede seguir siendo Fury; cambias el equipo y la postura según la situación.</div>
-      </section>
-
-      <section id="fuentes" class="card">
-        <h2>Fuentes y criterio</h2>
-        <p>Esta página no copia el diseño ni el texto de Icy Veins. Usa una estructura propia y resume información contrastada de guías públicas actuales para TBC Classic/Anniversary.</p>
-        <ul class="sources">
-          <li><a href="https://www.icy-veins.com/tbc-classic/fury-warrior-leveling-guide" target="_blank" rel="noopener">Icy Veins — Fury Warrior Leveling Guide 1–70</a> (actualizada 12 ene 2026).</li>
-          <li><a href="https://www.icy-veins.com/tbc-classic/warrior-leveling-guide" target="_blank" rel="noopener">Icy Veins — Warrior Leveling Guide 1–70</a> (comparación Arms/Fury/Protection).</li>
-          <li><a href="https://www.wowhead.com/tbc/guide/classes/warrior/fury/leveling-tips" target="_blank" rel="noopener">Wowhead — TBC Classic Fury Warrior Leveling</a> (actualizada 7 feb 2026).</li>
-          <li><a href="https://www.wowhead.com/tbc/guide/classes/warrior/protection/leveling-tips" target="_blank" rel="noopener">Wowhead — Protection Warrior Leveling</a> (discusión Fury vs Protection para tankear durante leveo).</li>
-          <li><a href="https://www.warcrafttavern.com/tbc/guides/warrior-leveling-guide/" target="_blank" rel="noopener">Warcraft Tavern — Warrior Leveling Guide</a> (notas de dungeons/tanking).</li>
-        </ul>
-        <p style="color:var(--muted);font-size:.9rem">Nota: las recomendaciones de talento pueden variar entre autores y según equipo, PvP, dungeon spam o solo questing. Esta ruta está orientada a Fury + flexibilidad para tankear.</p>
-      </section>
-    </div>
-  </div>
-</main>
-
-<footer>Guía personal y no oficial para World of Warcraft: The Burning Crusade Anniversary. World of Warcraft y sus marcas pertenecen a Blizzard Entertainment.</footer>
-
+:root{--bg:#0b0d10;--p:#15191f;--p2:#1b2028;--b:#303844;--t:#edf1f5;--m:#aab3bf;--g:#f0b84b;--r:#d94b4b;--ok:#70c48f;--sh:0 12px 32px #0006}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#090b0e,#11151b 38%,#0b0d10);color:var(--t);font:15.5px/1.55 Inter,system-ui,"Segoe UI",sans-serif}a{color:#f6cb72;text-decoration:none}a:hover{text-decoration:underline}header{position:sticky;top:0;z-index:20;background:#080a0de8;border-bottom:1px solid var(--b);backdrop-filter:blur(10px)}.nav{max-width:1180px;margin:auto;padding:12px 20px;display:flex;gap:22px;align-items:center}.brand{font-weight:850;white-space:nowrap}.brand span,.kicker,.lvl{color:var(--g)}.links{display:flex;gap:15px;flex-wrap:wrap;font-size:.92rem}main{max-width:1180px;margin:auto;padding:34px 20px 80px}.card{background:linear-gradient(var(--p2),var(--p));border:1px solid var(--b);border-radius:14px;box-shadow:var(--sh)}.hero{display:grid;grid-template-columns:1.6fr .8fr;gap:22px}.hero>div{padding:28px}.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;font-weight:850}h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.02;margin:.4rem 0 1rem}h2{font-size:1.72rem;margin:0 0 12px}h3{margin:0 0 7px}.lead{color:#cbd2da;font-size:1.08rem}.big{font-size:1.5rem;font-weight:850;color:var(--ok)}.muted{color:var(--m)}.badges,.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.badge,.pill{border:1px solid #493d27;background:#2a2215;color:#f7d38d;border-radius:999px;padding:5px 9px;font-size:.82rem;font-weight:700}.layout{display:grid;grid-template-columns:255px 1fr;gap:24px;margin-top:28px}aside{position:sticky;top:78px;height:max-content;padding:17px}aside a{display:block;padding:7px 9px;color:#cfd6de;border-radius:8px}aside a:hover{background:#202630;text-decoration:none}.content section{padding:25px;margin-bottom:20px}.note{border-left:4px solid var(--g);background:#201b12;padding:13px 15px;border-radius:8px;margin:17px 0}.good{border-left-color:var(--ok);background:#132019}.warn{border-left-color:var(--r);background:#251617}.levelbox{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}.levelnum{font-size:3rem;font-weight:900;color:var(--g)}input[type=range]{width:100%;accent-color:var(--g)}.talent,.advice{margin-top:10px;padding:15px;border:1px solid #544329;background:#211b12;border-radius:11px}.advice{border-color:#35404b;background:#111820;color:#cbd4dd}.advice strong{color:#f5ca73}.tname{font-size:1.3rem;font-weight:850}.tree{font-size:.76rem;padding:3px 7px;border-radius:999px;background:#34281a;color:#ffd985;margin-left:7px}.timeline{display:grid;gap:7px;margin-top:17px}.row{display:grid;grid-template-columns:65px 1.2fr 75px 1.5fr;gap:10px;padding:9px 11px;border:1px solid #2d333d;border-radius:9px;background:#12161b;align-items:center}.row.on{border-color:#a87b2d;background:#211a10}.rank{color:#aeb7c2}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.tile{padding:14px;border:1px solid #343c47;border-radius:11px;background:#12161b}.tile.best{border-color:#8c682b;background:#211a10}.tile .n{display:inline-grid;place-items:center;min-width:38px;height:38px;border-radius:9px;background:#352814;color:#ffd47d;font-weight:900;margin-bottom:8px}.tile strong{display:block}.tile p{margin:4px 0 0;color:#aeb7c2;font-size:.91rem}.steps{counter-reset:s;display:grid;gap:9px}.step{position:relative;padding:12px 13px 12px 46px;border:1px solid #303844;background:#12161b;border-radius:9px}.step:before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:11px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:#3a2b16;color:#ffd37e;font-weight:900}.table{overflow:auto}table{width:100%;border-collapse:collapse;font-size:.93rem}th,td{padding:10px;border-bottom:1px solid #303640;text-align:left;vertical-align:top}th{color:#f3cb7a;background:#171b21}.hi{color:#7ddb9e;font-weight:800}.sources li{margin:8px 0;color:#bec6cf}footer{max-width:1180px;margin:auto;padding:0 20px 40px;color:#7f8996;font-size:.85rem}@media(max-width:850px){.hero,.layout,.levelbox,.grid3{grid-template-columns:1fr}aside{position:static}.row{grid-template-columns:58px 1fr}.row .rank,.row .why{grid-column:2}}
+</style></head><body>
+<header><div class="nav"><div class="brand">TBC <span>Warrior</span> Leveling</div><nav class="links"><a href="#talentos">Talentos</a><a href="#hitos">Hitos</a><a href="#armas">Armas</a><a href="#tank">Tankeo</a><a href="#rotacion">Rotación</a><a href="#trainer">Trainer</a></nav></div></header>
+<main><div class="hero"><div class="card"><div class="kicker">WoW · The Burning Crusade Anniversary</div><h1>Fury Warrior<br>Leveling 10 → 70</h1><p class="lead">Ruta práctica para subir como <strong>Fury</strong>, questear con buen ritmo y seguir pudiendo <strong>tankear dungeons</strong> sin cambiar de spec cada vez.</p><div class="badges"><span class="badge">Fury leveling</span><span class="badge">Tank-friendly</span><span class="badge">Nivel por nivel</span><span class="badge">TBC Anniversary</span></div></div><div class="card"><div class="kicker">Criterio de la guía</div><div class="big">Fury sí; Dual Wield cuando tus armas lo justifiquen.</div><p class="muted">Wowhead favorece Fury/Dual Wield, mientras Icy Veins advierte que una buena 2H puede rendir mejor durante parte del leveo por miss y Rage. Esta guía muestra ambas cosas en vez de forzar un cambio al 20.</p></div></div>
+<div class="layout"><aside class="card"><strong>Contenido</strong><a href="#resumen">Resumen</a><a href="#talentos">Talentos</a><a href="#hitos">Hitos</a><a href="#armas">2H vs Dual Wield</a><a href="#tank">Tankear Fury</a><a href="#rotacion">Rotación</a><a href="#trainer">Trainer</a><a href="#fuentes">Fuentes</a></aside><div class="content">
+<section id="resumen" class="card"><h2>Resumen rápido</h2><div class="note good"><strong>Para tu recorrido:</strong> empieza Fury al 10, haz la quest de Defensive Stance y conserva un set 1H + Shield. Al 20 entrena Dual Wield, pero cambia solo si tus dos 1H compiten de verdad con tu 2H.</div><div class="pills"><span class="pill">10–14 Cruelty</span><span class="pill">15–19 Unbridled Wrath</span><span class="pill">20 Dual Wield</span><span class="pill">30 Berserker Stance</span><span class="pill">34 Sweeping Strikes</span><span class="pill">36 Whirlwind</span><span class="pill">40 Bloodthirst</span><span class="pill">50 Rampage</span></div></section>
+<section id="talentos" class="card"><h2>Talentos nivel por nivel</h2><p class="muted">Mueve el nivel. La secuencia sigue principalmente la ruta Fury de Icy Veins, con contexto adicional para armas y tankeo.</p><div class="levelbox"><div><div class="kicker">Tu nivel</div><div id="levelNum" class="levelnum">10</div></div><div><input id="slider" type="range" min="10" max="70" value="10"><div id="talent" class="talent"></div><div id="advice" class="advice"></div></div></div><div id="timeline" class="timeline"></div></section>
+<section id="hitos" class="card"><h2>Hitos que cambian tu forma de jugar</h2><div class="grid3"><div class="tile"><span class="n">10</span><strong>Defensive Stance</strong><p>Quest de clase; abre el kit básico de tankeo.</p></div><div class="tile"><span class="n">12</span><strong>Overpower</strong><p>Respuesta excelente a dodge; ideal para WeakAura.</p></div><div class="tile"><span class="n">16</span><strong>Shield Block</strong><p>Gran salto defensivo contra daño físico.</p></div><div class="tile"><span class="n">20</span><strong>Dual Wield</strong><p>Trainer. También Cleave, Retaliation y Stance Mastery.</p></div><div class="tile"><span class="n">24</span><strong>Execute</strong><p>Finisher fuerte, pero no vacíes Rage por costumbre.</p></div><div class="tile"><span class="n">30</span><strong>Berserker Stance</strong><p>Quest de clase + Intercept.</p></div><div class="tile"><span class="n">34</span><strong>Sweeping Strikes</strong><p>Gran power spike de cleave.</p></div><div class="tile"><span class="n">36</span><strong>Whirlwind</strong><p>Clave en multi-target; golpea con ambas armas en TBC.</p></div><div class="tile"><span class="n">40</span><strong>Bloodthirst</strong><p>Tu ataque central como Fury.</p></div><div class="tile"><span class="n">50</span><strong>Rampage</strong><p>Otro salto fuerte de daño.</p></div><div class="tile"><span class="n">62</span><strong>Victory Rush</strong><p>Excelente para chain pulling.</p></div><div class="tile"><span class="n">64</span><strong>Spell Reflection</strong><p>Herramienta defensiva/utilitaria enorme.</p></div></div></section>
+<section id="armas" class="card"><h2>2H vs Dual Wield: ¿cuándo cambiar?</h2><div class="note good"><strong>Dual Wield se habilita al nivel 20</strong> en el Warrior Trainer. Eso significa “puedes”, no “debes”.</div><div class="grid3"><div class="tile"><strong>10–19 · 2H</strong><p>Usa tu mejor 2H. El arma es la pieza de equipo más influyente durante el leveo.</p></div><div class="tile best"><strong>20+ · decide por calidad</strong><p>Dos 1H buenas → prueba DW. Una 2H claramente superior → mantenla hasta que aparezca un par competitivo.</p></div><div class="tile"><strong>Tank · 1H + Shield</strong><p>Conserva un set actualizado aunque tus talentos sigan siendo Fury.</p></div></div><h3>Reglas prácticas para Dual Wield</h3><div class="steps"><div class="step"><strong>Weapon DPS primero.</strong> No rechaces una mejora grande solo por la velocidad.</div><div class="step"><strong>Main hand:</strong> si son comparables, prefiere una arma lenta y de golpe alto.</div><div class="step"><strong>Off hand:</strong> una más rápida suele suavizar la generación de Rage; la calidad global sigue mandando.</div><div class="step"><strong>Weapon skill:</strong> si cambias de tipo de arma, súbelo contra mobs fáciles antes de comparar rendimiento.</div></div><div class="note"><strong>Por qué existe debate:</strong> Dual Wield añade una penalización importante de miss a los autoataques y la off-hand hace daño reducido. Wowhead considera Fury una ruta fuerte de leveo; Icy Veins recomienda cautela con DW temprano por Hit/Rage. En la práctica: <strong>usa el mejor conjunto de armas que tengas.</strong></div></section>
+<section id="tank" class="card"><h2>¿Puedo tankear siendo Fury?</h2><div class="note good"><strong>Sí.</strong> Las guías coinciden en que un Warrior puede tankear dungeons mientras levelea sin ser Protection. La prioridad es amenaza, manejo de Rage y saber cuándo volverte más defensivo.</div><div class="steps"><div class="step"><strong>Defensive Stance</strong> como base cuando necesitas amenaza/mitigación consistente.</div><div class="step"><strong>Sunder Armor + Revenge</strong>; tab-target para repartir amenaza.</div><div class="step"><strong>Marca kill target.</strong> Warrior tiene herramientas AoE limitadas al inicio.</div><div class="step"><strong>Guarda Rage</strong> al final del pull si el siguiente grupo está cerca.</div><div class="step"><strong>Shield Block</strong> desde 16 para bosses y daño físico peligroso.</div><div class="step"><strong>1H + Shield</strong> cuando el healer sufre, el pull es grande o el boss pega fuerte.</div></div><div class="note warn"><strong>No confundas “Fury puede tankear” con “nunca uses escudo”.</strong> Equipo, healer, nivel y tamaño del pull mandan.</div></section>
+<section id="rotacion" class="card"><h2>Rotación práctica</h2><h3>Nivel bajo / mundo abierto</h3><div class="steps"><div class="step">Mantén <strong>Battle Shout</strong>.</div><div class="step"><strong>Charge</strong> cuando puedas para abrir con Rage.</div><div class="step"><strong>Rend</strong> si el enemigo vivirá suficiente para aprovecharlo.</div><div class="step"><strong>Overpower</strong> cuando proc.</div><div class="step"><strong>Heroic Strike</strong> como Rage dump, no como spam automático.</div><div class="step">Desde 24, <strong>Execute</strong> si realmente necesitas rematar; si no, conserva Rage para el siguiente mob.</div></div><div class="note"><strong>Desde 34–36:</strong> Sweeping Strikes + Whirlwind vuelven muy atractivos los pulls de 2 objetivos. Desde 40, Bloodthirst pasa al centro de la rotación.</div></section>
+<section id="trainer" class="card"><h2>Trainer: lo que no conviene olvidar</h2><div class="table"><table><thead><tr><th>Lvl</th><th>Habilidad</th><th>Prioridad</th><th>Motivo</th></tr></thead><tbody><tr><td>10</td><td>Defensive Stance quest / Taunt / Sunder / Bloodrage</td><td class="hi">Alta</td><td>Base de tankeo.</td></tr><tr><td>12</td><td>Overpower + Shield Bash R1</td><td class="hi">Alta</td><td>Proc ofensivo + interrupt con escudo.</td></tr><tr><td>14</td><td>Demoralizing Shout</td><td class="hi">Alta</td><td>Mitigación útil.</td></tr><tr><td>16</td><td>Mocking Blow + Shield Block</td><td class="hi">Alta</td><td>Control y defensa física.</td></tr><tr><td>18</td><td>Disarm</td><td class="hi">Alta</td><td>Muy fuerte contra weapon users.</td></tr><tr><td>20</td><td>Dual Wield + Cleave + Retaliation + Stance Mastery</td><td class="hi">Alta</td><td>Gran paquete de utilidades y nuevo estilo de armas.</td></tr><tr><td>22</td><td>Intimidating Shout</td><td class="hi">Alta</td><td>Control de emergencia.</td></tr><tr><td>24</td><td>Execute</td><td class="hi">Alta</td><td>Finisher.</td></tr><tr><td>26</td><td>Challenging Shout</td><td class="hi">Alta</td><td>Recuperación AoE de emergencia.</td></tr><tr><td>28</td><td>Shield Wall</td><td class="hi">Alta</td><td>Cooldown defensivo mayor.</td></tr><tr><td>30</td><td>Berserker Stance quest + Intercept</td><td class="hi">Alta</td><td>Stance y movilidad.</td></tr><tr><td>32</td><td>Berserker Rage</td><td class="hi">Alta</td><td>Fear/Rage utility.</td></tr><tr><td>36</td><td>Whirlwind</td><td class="hi">Alta</td><td>Cleave central.</td></tr><tr><td>38</td><td>Pummel R1</td><td class="hi">Alta</td><td>Interrupt rápido.</td></tr><tr><td>40</td><td>Bloodthirst</td><td class="hi">Alta</td><td>Ataque Fury central.</td></tr><tr><td>50</td><td>Recklessness + Rampage</td><td class="hi">Alta</td><td>Power spike ofensivo.</td></tr><tr><td>62</td><td>Victory Rush</td><td class="hi">Alta</td><td>Chain pulling.</td></tr><tr><td>64</td><td>Spell Reflection</td><td class="hi">Alta</td><td>Defensa/utilidad.</td></tr><tr><td>68</td><td>Commanding Shout</td><td class="hi">Alta</td><td>Supervivencia grupal.</td></tr><tr><td>70</td><td>Intervene</td><td class="hi">Alta</td><td>Movilidad/protección.</td></tr></tbody></table></div></section>
+<section id="fuentes" class="card"><h2>Fuentes y criterio</h2><p>Resumen propio; no copia diseño ni texto de otros sitios.</p><ul class="sources"><li><a href="https://www.icy-veins.com/tbc-classic/fury-warrior-leveling-guide" target="_blank">Icy Veins — Fury Warrior Leveling</a> (12 ene 2026).</li><li><a href="https://www.icy-veins.com/tbc-classic/warrior-leveling-guide" target="_blank">Icy Veins — Warrior Leveling</a> (quests de stances).</li><li><a href="https://www.icy-veins.com/tbc-classic/warrior-weapons-guide" target="_blank">Icy Veins — Warrior Weapons</a> (armas y cautela con DW temprano).</li><li><a href="https://www.wowhead.com/tbc/guide/classes/warrior/fury/leveling-tips" target="_blank">Wowhead — Fury Warrior Leveling</a> (7 feb 2026).</li><li><a href="https://www.wowhead.com/tbc/guide/best-warrior-weapons-burning-crusade-classic-wow" target="_blank">Wowhead — Best Warrior Weapons</a> (MH lenta/OH rápida).</li><li><a href="https://www.warcrafttavern.com/tbc/guides/warrior-leveling-guide/" target="_blank">Warcraft Tavern — Warrior Leveling</a> (dungeons/tanking).</li></ul><p class="muted">Las recomendaciones cambian con equipo, arma disponible, dungeon spam, solo questing y preferencias. La regla de esta guía es práctica, no dogmática.</p></section>
+</div></div></main><footer>Guía personal y no oficial para World of Warcraft: The Burning Crusade Anniversary. World of Warcraft y sus marcas pertenecen a Blizzard Entertainment.</footer>
 <script>
-const talents = [{"level":10,"talent":"Cruelty","rank":"1/5","tree":"Fury","why":"+1% critical strike chance."},{"level":11,"talent":"Cruelty","rank":"2/5","tree":"Fury","why":"Early crit scales well with auto-attacks."},{"level":12,"talent":"Cruelty","rank":"3/5","tree":"Fury","why":"More crit; pairs nicely with Overpower unlocking at 12."},{"level":13,"talent":"Cruelty","rank":"4/5","tree":"Fury","why":"Keep pushing the strongest early passive."},{"level":14,"talent":"Cruelty","rank":"5/5","tree":"Fury","why":"Cruelty complete."},{"level":15,"talent":"Unbridled Wrath","rank":"1/5","tree":"Fury","why":"Chance to gain extra Rage from melee hits."},{"level":16,"talent":"Unbridled Wrath","rank":"2/5","tree":"Fury","why":"Smoother Rage generation."},{"level":17,"talent":"Unbridled Wrath","rank":"3/5","tree":"Fury","why":"More Rage over long grinding sessions."},{"level":18,"talent":"Unbridled Wrath","rank":"4/5","tree":"Fury","why":"Helps reduce dead time between abilities."},{"level":19,"talent":"Unbridled Wrath","rank":"5/5","tree":"Fury","why":"Unbridled Wrath complete."},{"level":20,"talent":"Commanding Presence","rank":"1/5","tree":"Fury","why":"Improves Battle Shout / Commanding Shout."},{"level":21,"talent":"Commanding Presence","rank":"2/5","tree":"Fury","why":"More Attack Power from your shout."},{"level":22,"talent":"Commanding Presence","rank":"3/5","tree":"Fury","why":"Useful solo and in physical-damage groups."},{"level":23,"talent":"Commanding Presence","rank":"4/5","tree":"Fury","why":"Continue toward the next tier."},{"level":24,"talent":"Piercing Howl","rank":"1/1","tree":"Fury","why":"Excellent AoE slow and escape tool."},{"level":25,"talent":"Enrage","rank":"1/5","tree":"Fury","why":"Damage boost after being critically hit."},{"level":26,"talent":"Enrage","rank":"2/5","tree":"Fury","why":"Stronger proc value."},{"level":27,"talent":"Enrage","rank":"3/5","tree":"Fury","why":"Useful while soloing and tanking."},{"level":28,"talent":"Enrage","rank":"4/5","tree":"Fury","why":"Continue."},{"level":29,"talent":"Enrage","rank":"5/5","tree":"Fury","why":"Enrage complete."},{"level":30,"talent":"Weapon Mastery","rank":"1/2","tree":"Fury","why":"Reduces dodge chance and disarm duration."},{"level":31,"talent":"Weapon Mastery","rank":"2/2","tree":"Fury","why":"Weapon Mastery complete."},{"level":32,"talent":"Dual Wield Specialization","rank":"1/5","tree":"Fury","why":"Improves off-hand damage."},{"level":33,"talent":"Dual Wield Specialization","rank":"2/5","tree":"Fury","why":"Second point for now."},{"level":34,"talent":"Sweeping Strikes","rank":"1/1","tree":"Fury","why":"Major cleave cooldown; very useful in dungeons."},{"level":35,"talent":"Flurry","rank":"1/5","tree":"Fury","why":"Attack speed after a critical strike."},{"level":36,"talent":"Flurry","rank":"2/5","tree":"Fury","why":"Pairs strongly with Whirlwind, learned at 36."},{"level":37,"talent":"Flurry","rank":"3/5","tree":"Fury","why":"Continue."},{"level":38,"talent":"Flurry","rank":"4/5","tree":"Fury","why":"Continue."},{"level":39,"talent":"Flurry","rank":"5/5","tree":"Fury","why":"Flurry complete."},{"level":40,"talent":"Bloodthirst","rank":"1/1","tree":"Fury","why":"Your core Fury attack. Big power spike."},{"level":41,"talent":"Precision","rank":"1/3","tree":"Fury","why":"Hit chance is especially valuable while dual wielding."},{"level":42,"talent":"Precision","rank":"2/3","tree":"Fury","why":"More reliable attacks and Rage."},{"level":43,"talent":"Precision","rank":"3/3","tree":"Fury","why":"Precision complete."},{"level":44,"talent":"Dual Wield Specialization","rank":"3/5","tree":"Fury","why":"Return to off-hand damage."},{"level":45,"talent":"Dual Wield Specialization","rank":"4/5","tree":"Fury","why":"Continue."},{"level":46,"talent":"Dual Wield Specialization","rank":"5/5","tree":"Fury","why":"Dual Wield Specialization complete."},{"level":47,"talent":"Blood Craze","rank":"1/3","tree":"Fury","why":"Small sustain after being critically hit."},{"level":48,"talent":"Blood Craze","rank":"2/3","tree":"Fury","why":"More passive healing while grinding."},{"level":49,"talent":"Blood Craze","rank":"3/3","tree":"Fury","why":"Blood Craze complete."},{"level":50,"talent":"Rampage","rank":"1/1","tree":"Fury","why":"Stacking Attack Power after a critical strike."},{"level":51,"talent":"Deflection","rank":"1/5","tree":"Arms","why":"Adds parry; useful for soloing and tanking."},{"level":52,"talent":"Deflection","rank":"2/5","tree":"Arms","why":"More avoidance."},{"level":53,"talent":"Deflection","rank":"3/5","tree":"Arms","why":"Continue."},{"level":54,"talent":"Deflection","rank":"4/5","tree":"Arms","why":"Continue."},{"level":55,"talent":"Deflection","rank":"5/5","tree":"Arms","why":"Deflection complete."},{"level":56,"talent":"Improved Charge","rank":"1/2","tree":"Arms","why":"More opening Rage."},{"level":57,"talent":"Improved Charge","rank":"2/2","tree":"Arms","why":"Improved Charge complete."},{"level":58,"talent":"Improved Thunder Clap","rank":"1/3","tree":"Arms","why":"Improves an important mitigation/AoE utility tool."},{"level":59,"talent":"Improved Thunder Clap","rank":"2/3","tree":"Arms","why":"Continue."},{"level":60,"talent":"Improved Thunder Clap","rank":"3/3","tree":"Arms","why":"Complete."},{"level":61,"talent":"Improved Overpower","rank":"1/2","tree":"Arms","why":"Raises Overpower critical chance."},{"level":62,"talent":"Improved Overpower","rank":"2/2","tree":"Arms","why":"Pairs nicely with frequent dodges while leveling."},{"level":63,"talent":"Anger Management","rank":"1/1","tree":"Arms","why":"Improves Rage flow."},{"level":64,"talent":"Deep Wounds","rank":"1/3","tree":"Arms","why":"Crits begin applying a bleed."},{"level":65,"talent":"Deep Wounds","rank":"2/3","tree":"Arms","why":"Continue."},{"level":66,"talent":"Deep Wounds","rank":"3/3","tree":"Arms","why":"Deep Wounds complete."},{"level":67,"talent":"Impale","rank":"1/2","tree":"Arms","why":"Increases critical strike damage of abilities."},{"level":68,"talent":"Impale","rank":"2/2","tree":"Arms","why":"Impale complete."},{"level":69,"talent":"Improved Execute","rank":"1/2","tree":"Fury","why":"Reduces Execute Rage cost."},{"level":70,"talent":"Improved Execute","rank":"2/2","tree":"Fury","why":"Finish the leveling build, then respec for endgame goals."}];
-const slider = document.getElementById('levelSlider');
-const levelNum = document.getElementById('levelNum');
-const current = document.getElementById('talentCurrent');
-const timeline = document.getElementById('timeline');
-
-function render(level) {
-  levelNum.textContent = level;
-  const step = talents.find(x => x.level === level);
-  if(step) {
-    current.innerHTML = `<div class="kicker">Punto de nivel ${step.level}</div>
-      <div><span class="talent-name">${step.talent}</span><span class="tree">${step.tree}</span></div>
-      <div><strong>${step.rank}</strong> · ${step.why}</div>`;
-  }
-  const from = Math.max(10, level - 3), to = Math.min(70, level + 5);
-  timeline.innerHTML = talents.filter(x => x.level >= from && x.level <= to).map(x =>
-    `<div class="row ${x.level===level?'active':''}">
-      <div class="lvl">Lvl ${x.level}</div><div><strong>${x.talent}</strong> <span class="tree">${x.tree}</span></div>
-      <div class="rank">${x.rank}</div><div class="why">${x.why}</div>
-    </div>`).join('');
-}
-slider.addEventListener('input', e => render(Number(e.target.value)));
-render(10);
-</script>
-</body>
-</html>
+const plan=[
+[10,14,'Cruelty',1,5,'Crit temprano: mejora autos y daño general.'],[15,19,'Unbridled Wrath',1,5,'Ayuda a suavizar la generación de Rage.'],[20,23,'Commanding Presence',1,5,'Mejora Battle Shout y el daño físico del grupo.'],[24,24,'Piercing Howl',1,1,'Slow AoE excelente para control y escapes.'],[25,29,'Enrage',1,5,'Daño extra después de recibir un crítico.'],[30,31,'Weapon Mastery',1,2,'Reduce dodge recibido y duración de disarm.'],[32,33,'Dual Wield Specialization',1,5,'Empieza a mejorar el daño de la off-hand.'],[34,34,'Sweeping Strikes',1,1,'Gran cooldown de cleave.'],[35,39,'Flurry',1,5,'Velocidad de ataque después de crit; núcleo Fury.'],[40,40,'Bloodthirst',1,1,'Power spike: ataque central de Fury.'],[41,43,'Precision',1,3,'Hit extra: especialmente valioso con Dual Wield.'],[44,46,'Dual Wield Specialization',3,5,'Completa el bonus de daño de off-hand.'],[47,49,'Blood Craze',1,3,'Algo de sustain al recibir críticos.'],[50,50,'Rampage',1,1,'Attack Power acumulable tras crit.'],[51,55,'Deflection',1,5,'Parry: útil solo y tankeando.'],[56,57,'Improved Charge',1,2,'Más Rage al abrir.'],[58,60,'Improved Thunder Clap',1,3,'Mejor utilidad/mitigación en multi-target.'],[61,62,'Improved Overpower',1,2,'Más crit con Overpower.'],[63,63,'Anger Management',1,1,'Mejora el flujo de Rage.'],[64,66,'Deep Wounds',1,3,'Tus críticos aplican bleed.'],[67,68,'Impale',1,2,'Aumenta daño crítico de habilidades.'],[69,70,'Improved Execute',1,2,'Reduce el coste mínimo de Execute.']];
+const $=id=>document.getElementById(id),slider=$('slider'),num=$('levelNum'),talent=$('talent'),advice=$('advice'),timeline=$('timeline');
+function stepFor(l){const p=plan.find(x=>l>=x[0]&&l<=x[1]);let rank=p[3]+(l-p[0]);return{l,n:p[2],r:`${rank}/${p[4]}`,w:p[5]}}
+function tip(l){if(l<20)return'<strong>Armas:</strong> mejor 2H disponible + 1H/Shield guardados para tank.';if(l<30)return'<strong>Dual Wield desbloqueado:</strong> úsalo si tienes dos 1H competitivas; una 2H claramente mejor sigue siendo válida.';if(l<34)return'<strong>Berserker Stance:</strong> practica Intercept y stance swapping; la calidad de armas todavía manda.';if(l<40)return'<strong>Cleave power spike:</strong> Sweeping Strikes al 34 + Whirlwind al 36.';if(l<50)return'<strong>Fury se estabiliza:</strong> Bloodthirst + Precision hacen DW mucho más cómodo.';if(l<62)return'<strong>Core Fury:</strong> Rampage activo; mantén también tu set de tank actualizado.';return'<strong>Outland avanzado:</strong> Victory Rush (62) y Spell Reflection (64) mejoran muchísimo el ritmo y la utilidad.'}
+function render(l){num.textContent=l;let s=stepFor(l);talent.innerHTML=`<div class="kicker">Punto de nivel ${l}</div><div><span class="tname">${s.n}</span><span class="tree">Fury/Arms</span></div><div><strong>${s.r}</strong> · ${s.w}</div>`;advice.innerHTML=tip(l);let a=[];for(let x=Math.max(10,l-3);x<=Math.min(70,l+5);x++)a.push(stepFor(x));timeline.innerHTML=a.map(x=>`<div class="row ${x.l==l?'on':''}"><div class="lvl">Lvl ${x.l}</div><div><strong>${x.n}</strong></div><div class="rank">${x.r}</div><div class="why">${x.w}</div></div>`).join('')}
+slider.oninput=e=>render(+e.target.value);render(10);
+</script></body></html>
