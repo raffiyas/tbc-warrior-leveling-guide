@@ -2,41 +2,50 @@
 
 Guía interactiva y no oficial para subir un Warrior Fury en **WoW: The Burning Crusade Anniversary**.
 
-## Sitio
+## Producción
 
-https://raffiyas.github.io/tbc-warrior-leveling-guide/
+https://tbc-warrior-leveling-guide.vercel.app/
 
-### V3 — Item Comparator
+GitHub sigue siendo la fuente del proyecto y Vercel despliega automáticamente cada cambio de `main`.
 
-https://raffiyas.github.io/tbc-warrior-leveling-guide/compare.html
+## V3.1 — My Warrior Companion
 
-El comparador permite enfrentar el arma equipada con una candidata usando weapon DPS, daño mínimo/máximo, velocidad, Strength, Agility, Stamina y costo. Incluye tooltips oficiales de Wowhead, guarda los datos en el navegador y ofrece acceso a la nueva búsqueda oficial de WoW Armory para Classic.
+La guía principal ahora incluye un perfil local de **Xhena** y el comparador de armas integrado dentro de la misma experiencia.
+
+- Perfil My Warrior con nombre, nivel, spec, región y realm.
+- Nivel sincronizado con el selector de talentos.
+- Próximo hito y estado de Dual Wield calculados desde el nivel actual.
+- Arma registrada reutilizada desde los datos guardados por el comparador.
+- Comparador V3 integrado en la guía mediante `compare.html`, con opción de abrirlo en pantalla completa.
+- Datos persistentes mediante `localStorage`.
+- Botón de búsqueda en la nueva WoW Armory Classic.
+
+## Backend Vercel
+
+El proyecto ya tiene su primera Vercel Function:
+
+`/api/health`
+
+Actualmente solo verifica que el backend esté operativo. La siguiente fase será preparar una ruta segura para Blizzard/Armory sin exponer credenciales en el frontend.
 
 ## Qué incluye
 
-- Talentos nivel por nivel de 10 a 70 con selector interactivo y nivel guardado en el navegador.
+- Talentos nivel por nivel de 10 a 70 con selector interactivo.
 - Hitos importantes: Defensive Stance, Overpower, Dual Wield, Berserker Stance, Sweeping Strikes, Whirlwind, Bloodthirst, Rampage, Victory Rush y Spell Reflection.
 - Comparación práctica **2H vs Dual Wield** desde nivel 20.
-- Reglas de selección de main hand / off hand y weapon skill.
 - Enfoque Fury con flexibilidad para tankear dungeons.
-- Checklist de amenaza, Rage, Sunder Armor, Revenge, Shield Block y uso de escudo.
-- Rotación práctica de leveo y habilidades importantes del trainer.
-- Sección de **addons útiles** para leveling, tanking, economía y dungeons.
-- Sección de **macros de Warrior con botón Copiar**, incluyendo Charge, Taunt mouseover, weapon swap, Shoot/Throw, Intercept, Pummel, Spell Reflection e Intervene.
-- Módulo **V3 Item Comparator** con Wowhead Powered Tooltips, perfil Xhena y cálculo de upgrade/value.
-- Fuentes públicas de Icy Veins, Wowhead, Warcraft Tavern y páginas de addons compatibles con Classic TBC.
+- Rotación práctica y prioridades del trainer.
+- Addons útiles para leveling, tanking, economía y dungeons.
+- Macros de Warrior con botón Copiar.
+- Comparador de armas con weapon DPS, daño, velocidad, STR/AGI/STA, costo y valor estimado.
+- Wowhead Powered Tooltips en el módulo de comparación.
 
-## Addons destacados
+## Arquitectura
 
-WeakAuras, Questie, Leatrix Plus, ThreatClassic2, Details!, OmniCC, AtlasLootClassic Anniversary, Bagnon, Auctionator y DBM.
-
-## Filosofía de la guía
-
-Dual Wield se desbloquea al nivel 20, pero no se fuerza el cambio automáticamente. Durante el leveo el arma tiene muchísimo peso, por lo que la guía recomienda comparar la calidad real de tu 2H frente a tus dos armas de una mano y escoger el conjunto que mejor funcione con tu equipo actual.
-
-## Tecnología
-
-Página estática sin dependencias. `index.html` contiene HTML, CSS y JavaScript, por lo que GitHub Pages puede publicarla directamente desde `main` y `/ (root)` sin npm ni build step. `compare.html` es el primer módulo de la V3 y usa el script oficial de Wowhead Powered Tooltips para mostrar datos al pasar el mouse sobre enlaces de ítems.
+- **GitHub**: código y versionado.
+- **Vercel**: producción, previews y funciones backend.
+- **Wowhead**: tooltips y referencias de ítems.
+- **Blizzard / WoW Armory**: integración prevista para la siguiente fase.
 
 ## Fuentes principales
 
