@@ -6,6 +6,12 @@ Guía interactiva y no oficial para subir un Warrior Fury en **WoW: The Burning 
 
 https://raffiyas.github.io/tbc-warrior-leveling-guide/
 
+### V3 — Item Comparator
+
+https://raffiyas.github.io/tbc-warrior-leveling-guide/compare.html
+
+El comparador permite enfrentar el arma equipada con una candidata usando weapon DPS, daño mínimo/máximo, velocidad, Strength, Agility, Stamina y costo. Incluye tooltips oficiales de Wowhead, guarda los datos en el navegador y ofrece acceso a la nueva búsqueda oficial de WoW Armory para Classic.
+
 ## Qué incluye
 
 - Talentos nivel por nivel de 10 a 70 con selector interactivo y nivel guardado en el navegador.
@@ -17,6 +23,7 @@ https://raffiyas.github.io/tbc-warrior-leveling-guide/
 - Rotación práctica de leveo y habilidades importantes del trainer.
 - Sección de **addons útiles** para leveling, tanking, economía y dungeons.
 - Sección de **macros de Warrior con botón Copiar**, incluyendo Charge, Taunt mouseover, weapon swap, Shoot/Throw, Intercept, Pummel, Spell Reflection e Intervene.
+- Módulo **V3 Item Comparator** con Wowhead Powered Tooltips, perfil Xhena y cálculo de upgrade/value.
 - Fuentes públicas de Icy Veins, Wowhead, Warcraft Tavern y páginas de addons compatibles con Classic TBC.
 
 ## Addons destacados
@@ -29,7 +36,7 @@ Dual Wield se desbloquea al nivel 20, pero no se fuerza el cambio automáticamen
 
 ## Tecnología
 
-Página estática sin dependencias. `index.html` contiene HTML, CSS y JavaScript, por lo que GitHub Pages puede publicarla directamente desde `main` y `/ (root)` sin npm ni build step.
+Página estática sin dependencias. `index.html` contiene HTML, CSS y JavaScript, por lo que GitHub Pages puede publicarla directamente desde `main` y `/ (root)` sin npm ni build step. `compare.html` es el primer módulo de la V3 y usa el script oficial de Wowhead Powered Tooltips para mostrar datos al pasar el mouse sobre enlaces de ítems.
 
 ## Fuentes principales
 
@@ -37,6 +44,7 @@ Página estática sin dependencias. `index.html` contiene HTML, CSS y JavaScript
 - Icy Veins — Warrior Leveling Guide 1–70
 - Icy Veins — Warrior Macros / Addons
 - Wowhead — TBC Classic Fury Warrior Leveling
+- Wowhead — Powered Tooltips
 - Warcraft Tavern — Warrior Leveling / Addons & Macros
 
 > Proyecto personal y no oficial. World of Warcraft y sus marcas pertenecen a Blizzard Entertainment.
