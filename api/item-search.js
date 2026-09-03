@@ -4,6 +4,8 @@ function cleanInput(value = '') {
   const linkName = s.match(/\|h\[([^\]]+)\]\|h/i);
   if (linkName) s = linkName[1];
   s = s.replace(/\|c[0-9a-f]{8}/ig, '').replace(/\|r/ig, '').replace(/^\[|\]$/g, '').trim();
+  // WoW/chat/UI copies may wrap the item name in quotes. Strip only matching outer quotes.
+  if ((s.startsWith('\"') && s.endsWith('\"')) || (s.startsWith('“') && s.endsWith('”')) || (s.startsWith("'") && s.endsWith("'"))) s = s.slice(1, -1).trim();
   return { text: s, itemId: idMatch ? Number(idMatch[1]) : null };
 }
 
@@ -66,6 +68,7 @@ function parseXml(xml) {
   const dmg = tooltip.match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s+Damage/i);
   const speed = tooltip.match(/Speed\s*([0-9.]+)/i);
   const dps = tooltip.match(/\(([0-9.]+)\s+damage per second\)/i);
+  const armorMatch = tooltip.match(/(\d+(?:\.\d+)?)\s+Armor/i);
   const stat = label => {
     const m = tooltip.match(new RegExp(`\\+(\\d+)\\s+${label}`, 'i'));
     return m ? Number(m[1]) : 0;
@@ -91,12 +94,46 @@ function parseXml(xml) {
     strength: Number(equip.str ?? stat('Strength') ?? 0) || 0,
     agility: Number(equip.agi ?? stat('Agility') ?? 0) || 0,
     stamina: Number(equip.sta ?? stat('Stamina') ?? 0) || 0,
+    intellect: Number(equip.int ?? stat('Intellect') ?? 0) || 0,
+    spirit: Number(equip.spi ?? equip.spr ?? stat('Spirit') ?? 0) || 0,
+    armor: Number(equip.armor ?? (armorMatch ? armorMatch[1] : 0) ?? 0) || 0,
+    kind: (dmg || speed || dps || /hand|ranged|bow|gun|crossbow|thrown|wand/i.test(inventorySlot)) ? 'weapon' : (armorMatch || Number(equip.armor || 0) > 0 ? 'armor' : 'other'),
     wowheadUrl: `https://www.wowhead.com/tbc/item=${Number(idMatch[1])}`
   };
 }
 
 function norm(s = '') {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function extractItemId(value = '') {
+  const m = String(value).match(/(?:item=|\/item\/)(\d+)/i);
+  return m ? Number(m[1]) : null;
+}
+
+async function fetchSuggestionId(term) {
+  const q = String(term || '').trim();
+  if (!q) return null;
+  try {
+    const response = await fetch(`https://www.wowhead.com/search/suggestions-open-search?q=${encodeURIComponent(q)}`, {
+      headers: {
+        'accept': 'application/json,text/plain;q=0.9,*/*;q=0.8',
+        'user-agent': 'Mozilla/5.0 (compatible; XhenaWarriorCompanion/1.1)'
+      },
+      redirect: 'follow'
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    if (!Array.isArray(data)) return null;
+    const names = Array.isArray(data[1]) ? data[1] : [];
+    const urls = Array.isArray(data[3]) ? data[3] : [];
+    let idx = names.findIndex(name => norm(name) === norm(q));
+    if (idx < 0) idx = names.findIndex(name => norm(name).includes(norm(q)) || norm(q).includes(norm(name)));
+    if (idx < 0) return null;
+    return extractItemId(urls[idx] || '');
+  } catch (_) {
+    return null;
+  }
 }
 
 async function fetchWowhead(term, isId = false) {
@@ -148,6 +185,14 @@ export default async function handler(req, res) {
         if (base && norm(base.name) === norm(baseName)) {
           item = base;
           resolvedFrom = 'base-name';
+        }
+      }
+
+      if (!item) {
+        const suggestionId = await fetchSuggestionId(baseName || cleaned.text);
+        if (suggestionId) {
+          item = await fetchWowhead(suggestionId, true);
+          resolvedFrom = 'suggestion';
         }
       }
 
