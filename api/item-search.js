@@ -114,13 +114,30 @@ function extractItemId(value = '') {
 async function fetchSuggestionId(term) {
   const q = String(term || '').trim();
   if (!q) return null;
+  const headers = {
+    'accept': 'application/json,text/plain;q=0.9,*/*;q=0.8',
+    'user-agent': 'Mozilla/5.0 (compatible; XhenaWarriorCompanion/1.2)'
+  };
+
+  // Current Wowhead rich suggestions include typed results with numeric IDs.
+  try {
+    const response = await fetch(`https://www.wowhead.com/search/suggestions-template?q=${encodeURIComponent(q)}`, {
+      headers, redirect: 'follow'
+    });
+    if (response.ok) {
+      const data = await response.json();
+      const results = Array.isArray(data?.results) ? data.results : [];
+      const items = results.filter(x => x && (x.typeName === 'Item' || x.type === 3) && Number(x.id));
+      let hit = items.find(x => norm(x.name) === norm(q));
+      if (!hit) hit = items.find(x => norm(x.name).includes(norm(q)) || norm(q).includes(norm(x.name)));
+      if (hit) return Number(hit.id);
+    }
+  } catch (_) {}
+
+  // Legacy OpenSearch fallback. Some deployments only return names, so this is secondary.
   try {
     const response = await fetch(`https://www.wowhead.com/search/suggestions-open-search?q=${encodeURIComponent(q)}`, {
-      headers: {
-        'accept': 'application/json,text/plain;q=0.9,*/*;q=0.8',
-        'user-agent': 'Mozilla/5.0 (compatible; XhenaWarriorCompanion/1.1)'
-      },
-      redirect: 'follow'
+      headers, redirect: 'follow'
     });
     if (!response.ok) return null;
     const data = await response.json();
