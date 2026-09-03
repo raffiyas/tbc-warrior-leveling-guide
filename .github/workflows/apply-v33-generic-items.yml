@@ -1,0 +1,33 @@
+name: Apply V3.3 Generic Item Comparator
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-v33-generic-items.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply V3.3
+        run: python scripts/apply_v33_generic_items.py
+      - name: Commit V3.3
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/item-search.js compare.html
+          git commit -m "fix: support quoted names and armor item comparison"
+          git push
