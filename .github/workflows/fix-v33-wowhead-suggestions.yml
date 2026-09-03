@@ -1,0 +1,31 @@
+name: Fix V3.3 Wowhead Suggestions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-v33-wowhead-suggestions.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python scripts/fix_v33_wowhead_suggestions.py
+      - name: Commit fix
+        run: |
+          if git diff --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/item-search.js
+          git commit -m "fix: resolve general items via Wowhead rich suggestions"
+          git push
